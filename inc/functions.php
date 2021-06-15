@@ -11,10 +11,10 @@ function validate($data){
     if($data['from'] != "" && $data['destination'] == $data['from']) {
         $validation[] = "Išvykimo ir atvykimo vietos negali sutapti.\n";
     }
-    if(empty($data['name']) || !preg_match('/[a-zA-Z]/', $data['name'])){   //     /^[a-z ,.'-]+$/i
+    if(empty($data['name']) || !preg_match('/[a-zA-Z]/', $data['name'])){   //     /^[a-zA-Z '\-]+$/i
         $validation[] = "Neteisingai įvestas vardas.\n";
     }
-    if(empty($data['lastname']) || !preg_match('/[a-zA-Z]/', $data['lastname'])){   //[a-zA-Z0-9]{3,20}
+    if(empty($data['lastname']) || !preg_match('/[a-zA-Z]/', $data['lastname'])){   //[a-zA-Z '\-]{3,20}
         echo "neteisingai pavarde";
         $validation[] = "Neteisingai įvesta pavardė.\n";
     }
@@ -22,7 +22,7 @@ function validate($data){
         echo "neteisingai ivestas kodas";
         $validation[] = "Neteisingai įvestas asmens kodas.\n";
     }
-    if(empty($data['price']) || !preg_match('/^\d+(\.\d{2})$/', $data['price'])){   //[a-zA-Z0-9]{3,20}   //  /^\d{11}$/
+    if(empty($data['price']) || !preg_match('/^\d+(\.\d{2})$/', $data['price'])){   
         echo "neteisingai kaina";
         $validation[] = "Neteisingai įvesta kaina.\n";
     }
@@ -34,7 +34,8 @@ function storeData(){
     global $input;
     $content = file_get_contents(dataFile);
     $input = $_POST;
-    $input['price']= countPrice();
+    $_POST['name']= "naujasVardas";
+    echo $input['name'];
     $formData = implode(',', $_POST);
     $content .= $formData."/n";
     file_put_contents(dataFile, $content); //rašom į tekstinį failą formos duomenis
