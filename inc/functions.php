@@ -34,8 +34,8 @@ function storeData(){
     global $input;
     $content = file_get_contents(dataFile);
     $input = $_POST;
-    $_POST['name']= "naujasVardas";
-    echo $input['name'];
+    //$_POST['name']= "naujasVardas";
+    //echo $input['name'];
     $formData = implode(',', $_POST);
     $content .= $formData."/n";
     file_put_contents(dataFile, $content); //rašom į tekstinį failą formos duomenis
