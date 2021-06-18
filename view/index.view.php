@@ -17,7 +17,7 @@
                 unset($_POST['submit']);
                 $validation=validate($_POST);
                 if(empty($validation)){
-                    echo "Nėra validacijos problemų";
+                    echo "Nėra validacijos problemų. ";
                     storeData();
                     countPrice();
                     addDate();
@@ -25,9 +25,6 @@
                 else {
                     foreach ($validation as $error) {
                         echo $error;
-                    }
-                    if (empty($input)) {
-                        echo "\ninput tuščias";
                     }
                 }
             } 
